@@ -6,3 +6,6 @@ README.md
 .gitignore
 jest.config.ts
 tsconfig.json
+__test__
+.husky
+.*

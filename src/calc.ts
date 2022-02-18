@@ -7,21 +7,6 @@ export type And<C1 extends boolean, C2 extends boolean> = C1 extends true
     : false
   : false
 
-// 有三个条件的情况
-export type And3<
-  C1 extends boolean,
-  C2 extends boolean,
-  C3 extends boolean
-> = And<And<C1, C2>, C3>
-
-// 有四个条件的情况
-export type And4<
-  C1 extends boolean,
-  C2 extends boolean,
-  C3 extends boolean,
-  C4 extends boolean
-> = And<And3<C1, C2, C3>, C4>
-
 // 与，即 C1，C2 有一个为真
 export type Or<C1 extends boolean, C2 extends boolean> = C1 extends true
   ? true

@@ -1,14 +1,11 @@
 {
-  "name": "rh-ts-methods",
-  "version": "0.0.2",
+  "name": "rh-ts-type",
+  "version": "0.0.1",
   "description": "方法包",
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "scripts": {
-    "build": "tsc",
-    "dev": "ts-node-dev --respawn --transpile-only ./src/test/index.ts",
+    "dev": "ts-node-dev --respawn --transpile-only ./__test__/index.ts",
     "dev_test": "ts-node-dev --respawn --transpile-only ./src/__test__/test_rh.ts",
-    "test": "jest",
-    "test-c": "jest --coverage",
     "restart": "rimraf dist && npm run build && npm start",
     "start": "node ./dist/index.js",
     "prod": "npm run build && npm run start",
@@ -25,9 +22,6 @@
   ],
   "author": "ruihuag",
   "license": "ISC",
-  "dependencies": {
-    "reflect-metadata": "^0.1.13"
-  },
   "lint-staged": {
     "*.{ts,js,tsx}": [
       "eslint",

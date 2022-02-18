@@ -1,6 +1,7 @@
 import { IntAddSingle } from './number'
 import { Compare } from './helper'
 import { Push, Or, IsEqual } from './index'
+
 // 将类型转为字符串有一定的限制，仅支持下面的类型
 export type CanStringified =
   | string
@@ -12,6 +13,12 @@ export type CanStringified =
 
 // 将支持的类型转化为字符串
 export type Stringify<T extends CanStringified> = `${T}`
+
+// 去除空格
+export type TrimLeft<str extends string> = str extends `${' '|'\t'|'\n'|'\n'}${infer rest}` ?  TrimLeft<rest> : str
+export type TrimRight<str extends string> = str extends `${infer rest}${' '|'\t'|'\n'|'\n'}` ?  TrimRight<rest> : str
+export type Trim<str extends string> = TrimLeft<TrimRight<str>>
+
 
 type SplitHelper<
   S extends string,
@@ -118,13 +125,11 @@ type IndexOfHelper<
  * @example
  * type Result = IndexOf<"123", "23"> // 1
  */
-export type IndexOf<S1 extends string, S2 extends string> = IndexOfHelper<
-  S1,
-  S2
->
+export type IndexOf<S1 extends string, S2 extends string> = IndexOfHelper< S1, S2 >
 
 /**
  * 在字符串中查找并替换一处子串
+ * MatchStr 不支持 正则
  * @example
  * type Result = Replace<"23123", "23", "xx"> // "xx123"
  */

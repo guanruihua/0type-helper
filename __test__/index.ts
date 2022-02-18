@@ -1,5 +1,7 @@
+/* eslint-disable*/
 import { rUtil, rFunction } from 'rh-js-methods'
-import * as Type from '../index'
+import * as Type from '../src/index'
+import { Pop } from '../src/index'
 
 const onceLogGroup = rFunction.once(rUtil.logGroup)
 
@@ -19,10 +21,17 @@ interface Person {
   name: string
   sex: string
 }
-
+{
+  type t = Type.TrimLeft<'   aa   '>
+  type t1 = Type.TrimRight<'   aa   '>
+  type t2 = Type.Trim<'   aa   '>
+  type t3 = Type.Replace<'   aa   ', ' ', 'b'>
+}
 {
   onceLogGroup('array')
-  type res = Type.Pop<[1,3,4]>
+  type t = Type.Pop<[1,3,4]>
+  type t2 = Type.Push<[1,3,4], 3>
+  type t3 = Type.Shift<[1,3,4]>
 }
 
 {

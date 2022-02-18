@@ -16,9 +16,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
   },
-  "include": [
-    "./src/**/*"
-  ],
+  "include": [ "./src/**/*" , "__test__"  ],
   "exclude": [
     "./src/test",
     "*.spec.ts"
