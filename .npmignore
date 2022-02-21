@@ -7,5 +7,6 @@ README.md
 jest.config.ts
 tsconfig.json
 __test__
+commitlint.config.js
 .husky
 .*
