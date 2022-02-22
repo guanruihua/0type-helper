@@ -1,6 +1,6 @@
 {
   "name": "rh-ts-type",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "方法包",
   "main": "src/index.js",
   "scripts": {
