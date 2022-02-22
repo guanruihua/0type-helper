@@ -16,3 +16,6 @@ export type Or<C1 extends boolean, C2 extends boolean> = C1 extends true
 
 // 非，即反转 C 的真假状态
 export type Not<C extends boolean> = C extends true ? false : true
+
+// 并集
+export type SumAggregate<T, U> = T | U

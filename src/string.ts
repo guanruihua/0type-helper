@@ -2,6 +2,48 @@ import { IntAddSingle } from './number'
 import { Compare } from './helper'
 import { Push, Or, IsEqual } from './index'
 
+export type ToUpperCase<S extends string> = Uppercase<S> // 转大写
+export type ToLowerCase<S extends string> = Lowercase<S> // 转小写
+
+// type SubStringHelper<
+//   S extends string,
+//   Start extends number,
+//   End extends number,
+//   Offset extends number = 0,
+//   Cache extends string[] = []
+// > = IsEqual<Offset, End> extends true
+//   ? JoIn<Cache, ''>
+//   : SubStringHelper<
+//       S,
+//       Start,
+//       End,
+//       number.IntAddSingle<Offset, 1>,
+//       common.And3<
+//         common.Or<number.Compare<Offset, Start>, number.IsEqual<Offset, Start>>,
+//         common.Or<number.Compare<End, Offset>, number.IsEqual<Offset, End>>,
+//         CharAt<S, Offset> extends string ? true : false
+//       > extends true
+//         ? array.Push<Cache, CharAt<S, Offset>>
+//         : Cache
+//     >
+
+// export type SubString<
+//   S extends string,
+//   Start extends number,
+//   End extends number
+// > = SubStringHelper<S, Start, End>
+
+/**
+ * 在字符串中抽取从 开始 下标开始的指定数目的字符
+ * @example
+ * type Result = SubStr<'123', 1, 2> // '23'
+ */
+// type SubStr<
+//   S extends string,
+//   Start extends number,
+//   Len extends number
+// > = SubStringHelper<S, Start, number.IntAddSingle<Start, Len>>
+
 // 将类型转为字符串有一定的限制，仅支持下面的类型
 export type CanStringified =
   | string
@@ -15,10 +57,21 @@ export type CanStringified =
 export type Stringify<T extends CanStringified> = `${T}`
 
 // 去除空格
-export type TrimLeft<str extends string> = str extends `${' '|'\t'|'\n'|'\n'}${infer rest}` ?  TrimLeft<rest> : str
-export type TrimRight<str extends string> = str extends `${infer rest}${' '|'\t'|'\n'|'\n'}` ?  TrimRight<rest> : str
+export type TrimLeft<str extends string> = str extends `${
+  | ' '
+  | '\t'
+  | '\n'
+  | '\n'}${infer rest}`
+  ? TrimLeft<rest>
+  : str
+export type TrimRight<str extends string> = str extends `${infer rest}${
+  | ' '
+  | '\t'
+  | '\n'
+  | '\n'}`
+  ? TrimRight<rest>
+  : str
 export type Trim<str extends string> = TrimLeft<TrimRight<str>>
-
 
 type SplitHelper<
   S extends string,
@@ -77,7 +130,7 @@ export type CharAt<S extends string, I extends number> = Split<S>[I]
  * @example
  * type Result = Concat<"123", "456"> // "123456"
  */
-export type Concat<S1 extends string, S2 extends string> = `${S1}${S2}`
+export type ConcatString<S1 extends string, S2 extends string> = `${S1}${S2}`
 
 /**
  * 判断字符串是否包含子串
@@ -125,7 +178,10 @@ type IndexOfHelper<
  * @example
  * type Result = IndexOf<"123", "23"> // 1
  */
-export type IndexOf<S1 extends string, S2 extends string> = IndexOfHelper< S1, S2 >
+export type IndexOf<S1 extends string, S2 extends string> = IndexOfHelper<
+  S1,
+  S2
+>
 
 /**
  * 在字符串中查找并替换一处子串
@@ -177,3 +233,5 @@ export type LastIndexOf<
   S1 extends string,
   S2 extends string
 > = LastIndexOfHelper<S1, S2>
+
+

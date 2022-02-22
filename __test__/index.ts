@@ -21,6 +21,21 @@ interface Person {
   name: string
   sex: string
 }
+
+{
+  console.log('array')
+  // type t = Type.TupleToUnion<[string, number, 'ruihuag']>
+  type t = Type.TupleToUnion<['1', '3', 'ruihuag']>
+  let a: t = '1'
+  type t2 = Type.Join<[1, 4, 5],'-'>
+  let a2: t2 = '1-4-5'
+}
+
+{
+  console.log('string')
+  type t = Type.ToUpperCase<'RUIuihuag'>
+}
+
 {
   type t = Type.TrimLeft<'   aa   '>
   type t1 = Type.TrimRight<'   aa   '>
@@ -29,9 +44,9 @@ interface Person {
 }
 {
   onceLogGroup('array')
-  type t = Type.Pop<[1,3,4]>
-  type t2 = Type.Push<[1,3,4], 3>
-  type t3 = Type.Shift<[1,3,4]>
+  type t = Type.Pop<[1, 3, 4]>
+  type t2 = Type.Push<[1, 3, 4], 3>
+  type t3 = Type.Shift<[1, 3, 4]>
 }
 
 {
