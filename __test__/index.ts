@@ -23,6 +23,11 @@ interface Person {
 }
 
 {
+  console.log('utils');
+  
+}
+
+{
   console.log('array')
   // type t = Type.TupleToUnion<[string, number, 'ruihuag']>
   type t = Type.TupleToUnion<['1', '3', 'ruihuag']>

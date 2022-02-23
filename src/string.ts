@@ -137,7 +137,7 @@ export type ConcatString<S1 extends string, S2 extends string> = `${S1}${S2}`
  * @example
  * type Result = Includes<"123", "12"> // true
  */
-export type Includes<
+export type StringIncludes<
   S1 extends string,
   S2 extends string
 > = S1 extends `${infer Left}${S2}${infer Right}` ? true : false //  eslint-disable-line
@@ -206,7 +206,7 @@ export type ReplaceAll<
   S extends string,
   MatchStr extends string,
   ReplaceStr extends string
-> = Includes<S, MatchStr> extends true
+> = StringIncludes<S, MatchStr> extends true
   ? ReplaceAll<Replace<S, MatchStr, ReplaceStr>, MatchStr, ReplaceStr>
   : S
 

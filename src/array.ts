@@ -1,7 +1,13 @@
-import { IsEqual } from './utils'
+import { CheckLeftIsExtendsRight, IsEqual } from './utils'
 import { CanStringified } from './string'
-import { And, Not } from './calc'
-import { IntAddSingle } from 'number'
+import { And, Not, Or } from './calc'
+import { IntAddSingle } from './number'
+
+type IsTempEqual<A, B> = (<T>() => T extends A ? 1 : 2) extends <
+  T1
+>() => T1 extends B ? 1 : 2
+  ? true
+  : false
 
 // type FilterHelper<
 //   T extends unknown[],
@@ -26,80 +32,98 @@ import { IntAddSingle } from 'number'
 //         : Cache
 //     >
 
-// /**
-//  * 过滤出元组类型中符合条件的类型
-//  * @example
-//  * type Result = Filter<['1', '2', 3, any, 1], 1, true> // [1]
-//  */
-// type Filter<
-//   T extends unknown[],
-//   C,
-//   Strict extends boolean = false
-// > = FilterHelper<T, C, Strict>
+/**
+ * 过滤出元组类型中符合条件的类型
+ * @example
+ * type Result = Filter<['1', '2', 3, any, 1], 1, true> // [1]
+ */
+export type Filter<
+  T extends unknown[],
+  C,
+  Strict extends boolean = false
+> = FilterHelper<T, C, Strict>
 
+type FilterHelper<
+  T extends unknown[],
+  C,
+  Strict extends boolean,
+  Offset extends number = 0,
+  Cache extends unknown[] = []
+> = Offset extends T['length']
+  ? Cache
+  : FilterHelper<
+      T,
+      C,
+      Strict,
+      IntAddSingle<Offset, 1>,
+      And<Strict, IsTempEqual<T[Offset], C>> extends true
+        ? Push<Cache, T[Offset]>
+        : And<Not<Strict>, CheckLeftIsExtendsRight<T[Offset], C>> extends true
+        ? Push<Cache, T[Offset]>
+        : Cache
+    >
 
-// type FillHelper<
-//   T extends unknown[],
-//   F,
-//   Offset extends number = 0
-// > = T['length'] extends 0
-//   ? F[]
-//   : Offset extends T['length']
-//   ? IsEqual<T, F[]> extends true /** any[] -> T[] */
-//     ? T
-//     : F[]
-//   : FillHelper<Push<Shift<T>, F>, F, IntAddSingle<Offset, 1>>
+/**
+ * 以指定类型填充元组类型
+ * @example
+ * type Result = Fill<['1', '2', 3, any], 1> // [1, 1, 1, 1]
+ */
+export type Fill<T extends unknown[], F = undefined> = FillHelper<T, F>
+type FillHelper<
+  T extends unknown[],
+  F,
+  Offset extends number = 0
+> = T["length"] extends 0
+  ? F[]
+  : Offset extends T["length"]
+  ? IsTempEqual<T, F[]> extends true /** any[] -> T[] */
+    ? T
+    : F[]
+  : FillHelper<Push<Shift<T>, F>, F, IntAddSingle<Offset, 1>>
 
-// /**
-//  * 以指定类型填充元组类型
-//  * @example
-//  * type Result = Fill<['1', '2', 3, any], 1> // [1, 1, 1, 1]
-//  */
-// type Fill<T extends unknown[], F = undefined> = FillHelper<T, F>
+type SomeHelper<
+  T extends unknown[],
+  Check,
+  Offset extends number = 0,
+  CacheBool extends boolean = false
+> = T['length'] extends Offset
+  ? CacheBool
+  : SomeHelper<
+      T,
+      Check,
+      IntAddSingle<Offset, 1>,
+      Or<CheckLeftIsExtendsRight<T[Offset], Check>, CacheBool>
+    >
 
-// type SomeHelper<
-//   T extends unknown[],
-//   Check,
-//   Offset extends number = 0,
-//   CacheBool extends boolean = false
-// > = T["length"] extends Offset
-//   ? CacheBool
-//   : SomeHelper<
-//       T,
-//       Check,
-//       number.IntAddSingle<Offset, 1>,
-//       common.Or<common.CheckLeftIsExtendsRight<T[Offset], Check>, CacheBool>
-//     >
+/**
+ * 校验元组中是否有类型符合条件
+ * @example
+ * type Result = Every<['1', '2', 3], number> // true
+ */
+export type Some<T extends unknown[], Check> = SomeHelper<T, Check>
 
-// /**
-//  * 校验元组中是否有类型符合条件
-//  * @example
-//  * type Result = Every<['1', '2', 3], number> // true
-//  */
-// type Some<T extends unknown[], Check> = SomeHelper<T, Check>
+type EveryHelper<
+  T extends unknown[],
+  Check,
+  Offset extends number = 0,
+  CacheBool extends boolean = true
+> = T['length'] extends Offset
+  ? CacheBool
+  : EveryHelper<
+      T,
+      Check,
+      IntAddSingle<Offset, 1>,
+      And<CheckLeftIsExtendsRight<T[Offset], Check>, CacheBool>
+    >
 
-// type EveryHelper<
-//   T extends unknown[],
-//   Check,
-//   Offset extends number = 0,
-//   CacheBool extends boolean = true
-// > = T["length"] extends Offset
-//   ? CacheBool
-//   : EveryHelper<
-//       T,
-//       Check,
-//       IntAddSingle<Offset, 1>,
-//       And<CheckLeftIsExtendsRight<T[Offset], Check>, CacheBool>
-//     >
-
-// /**
-//  * 校验元组中每个类型是否都符合条件
-//  * @example
-//  * type Result = Every<[1, 2, 3], number> // true
-//  */
-// export type Every<T extends unknown[], Check> = T["length"] extends 0
-//   ? false
-//   : EveryHelper<T, Check>
+/**
+ * 校验元组中每个类型是否都符合条件
+ * @example
+ * type Result = Every<[1, 2, 3], number> // true
+ */
+export type Every<T extends unknown[], Check> = T['length'] extends 0
+  ? false
+  : EveryHelper<T, Check>
 
 /*--- start ---*/
 /**

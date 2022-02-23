@@ -1,6 +1,6 @@
 # 描述
 
-> 参考 mock , lodash 库
+> 参考 <https://juejin.cn/post/7061556434692997156#heading-60>
 > 本仓库主要是学习使用
 
 ## 约束
