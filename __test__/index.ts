@@ -1,6 +1,8 @@
 /* eslint-disable*/
 import { rUtil, rFunction } from 'rh-js-methods'
 import * as Type from '../src/index'
+import './function'
+import './calc'
 import { Pop } from '../src/index'
 
 const onceLogGroup = rFunction.once(rUtil.logGroup)
@@ -11,7 +13,6 @@ const onceLogGroup = rFunction.once(rUtil.logGroup)
    en_US: '12123',
    zh_CN: '123',
    zh_TW: '123123'
-
   }
 }
 

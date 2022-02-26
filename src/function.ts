@@ -1,7 +1,4 @@
 // 任意 普通 function
-// export type AnyFunction = (...args: any) => any
-
-// 任意 普通 function
 export type Noop = (...args: any) => any
 
 // 获取异步函数的返回值

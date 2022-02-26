@@ -13,11 +13,8 @@ export type IsZero<N extends NumberLike> = CheckLeftIsExtendsRight<N, 0 | '0'>
 // number类型是否大于0，泛型类型有限制 NumberLike，所以它一定是个数或者由数字构成的字符串，将其转为字符串后，判断最前面是不是 -，如果不是，就是大于零
 export type IsOverZero<N extends NumberLike> = IsZero<N> extends true
   ? false
-  : CheckLeftIsExtendsRight<
-      Stringify<N> extends `${'-'}${infer Rest}` ? Rest : never,
-      never
-    >
-
+  : Stringify<N> extends `${'-'}${infer Rest}` ? false : true // eslint-disable-line
+      
 // number类型是否小于0，对上面 IsOverZero 的结果取反
 export type IsLessZero<N extends NumberLike> = Not<IsOverZero<N>>
 
