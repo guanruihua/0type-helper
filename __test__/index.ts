@@ -5,6 +5,17 @@ import { Pop } from '../src/index'
 
 const onceLogGroup = rFunction.once(rUtil.logGroup)
 
+{
+  type Lang = 'zh_CN' | 'en_US' | 'zh_TW'
+  const a: Record<Lang, string>={
+   en_US: '12123',
+   zh_CN: '123',
+   zh_TW: '123123'
+
+  }
+}
+
+
 interface Example {
   name: string
   height: number

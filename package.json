@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only ./__test__/index.ts",
+    "devD": "ts-node-dev --respawn --transpile-only ./__test__/test_d.ts",
     "dev_test": "ts-node-dev --respawn --transpile-only ./src/__test__/test_rh.ts",
     "restart": "rimraf dist && npm run build && npm start",
     "start": "node ./dist/index.js",
