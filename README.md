@@ -276,6 +276,44 @@
 - `T1 extends unknown[]`
 - `T2 extends unknown[]`
 
+### `TupleToUnion<T>`
+
+- 从元祖类型构造联合类型
+- `T extends unknown[]`
+
+### `Pop<T>`
+
+- `T extends unknown[]`
+
+### `Push<T>`
+
+- `T extends unknown[]`
+
+### `Shift<T>`
+
+- `T extends unknown[]`
+
+### `UnShift<T>`
+
+- `T extends unknown[]`
+
+### `Join<T>`
+
+- `T extends unknown[]`
+
+### `Every<T>`
+
+- `T extends unknown[]`
+
+### `Some<T>`
+
+- `T extends unknown[]`
+
+```ts
+ const t1: TupleToUnion<['a', 'b']> = 'a'
+ const t2: TupleToUnion<['a', 'b']> = 'b'
+```
+
 ### function
 
 | type                                         | 描述                 |
