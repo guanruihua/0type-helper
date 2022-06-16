@@ -2,6 +2,17 @@ import { CheckLeftIsExtendsRight, IsEqual } from './utils'
 import { CanStringified } from './string'
 import { And, Not, Or } from './calc'
 import { IntAddSingle } from './number'
+/**
+ * 构造长度一定（Length）的元组
+ * @example
+ * type Result = GetTuple<3> // [unknown, unknown, unknown]
+ */
+export type GetTuple<Length extends number = 0> = GetTupleHelper<Length>
+
+type GetTupleHelper<
+  Length extends number = 0,
+  R extends unknown[] = []
+> = R["length"] extends Length ? R : GetTupleHelper<Length, [...R, unknown]>
 
 type IsTempEqual<A, B> = (<T>() => T extends A ? 1 : 2) extends <
   T1
@@ -102,7 +113,6 @@ export type Every<T extends unknown[], Check> = T['length'] extends 0
   ? false
   : EveryHelper<T, Check>
 
-/*--- start ---*/
 /**
  * @description 从数组类型构造联合型
  * [number, string] => number | string
@@ -110,7 +120,6 @@ export type Every<T extends unknown[], Check> = T['length'] extends 0
 
 export type TupleToUnion<T extends unknown[]> = T[number]
 
-/*--- end ---*/
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type Pop<T extends unknown[]> = T extends [...infer rest, infer R]
@@ -136,7 +145,6 @@ export type Shift<T extends unknown[]> = T extends [infer R, ...infer rest]
  */
 export type UnShift<T extends unknown[], Item> = [Item, ...T]
 
-/*--- start ---*/
 type SetHelper<
   T extends unknown[],
   Index extends number,
@@ -164,7 +172,6 @@ export type ArraySet<
   Value
 > = SetHelper<T, Index, Value>
 
-/*--- end ---*/
 
 // 连接两个数组
 export type Concat<T extends unknown[], R extends unknown[]> = [...T, ...R]

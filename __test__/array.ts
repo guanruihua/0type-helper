@@ -1,5 +1,10 @@
+import { ArraySet } from './../src/array';
 import { Filter } from '../src'
 
+
+{
+	const t1: ArraySet<[1, 3, 4], 2, 5> = [1, 3, 5]
+}
 
 {
 	// const t1:GetTuple<0> = []

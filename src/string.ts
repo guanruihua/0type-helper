@@ -39,22 +39,23 @@ type SubStringHelper<
         : Cache
     >
 
+/**
+ * 在字符串中抽取从 开始 下标开始的指定数目的字符
+ * @example
+ * type Result = SubStr<'123', 1, 3> // '23'
+ */
 export type SubString<
   S extends string,
   Start extends number,
   End extends number
 > = SubStringHelper<S, Start, End>
 
-/**
- * 在字符串中抽取从 开始 下标开始的指定数目的字符
- * @example
- * type Result = SubStr<'123', 1, 2> // '23'
- */
-// type SubStr<
-//   S extends string,
-//   Start extends number,
-//   Len extends number
-// > = SubStringHelper<S, Start, number.IntAddSingle<Start, Len>>
+
+export type SubStr<
+  S extends string,
+  Start extends number,
+  Len extends number
+> = SubStringHelper<S, Start, IntAddSingle<Start, Len>>
 
 
 

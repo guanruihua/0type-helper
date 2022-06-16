@@ -1,4 +1,13 @@
-import { Stringify, GetChars, Split, GetStringLength, ConcatString, IncludeString, CharAt, StartsWith, EndsWith, Repeat, IndexOf, LastIndexOf, Replace, ReplaceAll, PadStart, PadEnd, Trim, TrimLeft, TrimRight, ToUpperCase, ToLowerCase } from '../src'
+import { Stringify, GetChars, Split, GetStringLength, ConcatString, IncludeString, CharAt, StartsWith, EndsWith, Repeat, IndexOf, LastIndexOf, Replace, ReplaceAll, PadStart, SubString, PadEnd, Trim, TrimLeft, TrimRight, ToUpperCase, ToLowerCase } from '../src'
+
+{
+	const t1: SubString<'123', 1, 3> = '23'
+	const t2: SubString<'123', 0, 2> = '12'
+	const t3: SubString<'123', 0, 3> = '123'
+	// const t4: SubStr<'123', 1, 1> = '2'
+	// const t5: SubStr<'123', 0, 1> = '1'
+	// const t6: SubStr<'123', 2, 3> = '3'
+}
 
 {
 	const t1: ToUpperCase<'abc'> = 'ABC'

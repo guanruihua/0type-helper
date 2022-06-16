@@ -243,6 +243,39 @@
 
 ### `SubString<S,Start,End>`
 
+- 截取子串
+- `S extends string`
+- `Start extends number`
+- `End extends number`
+
+```ts
+ const t1: SubString<'123', 1, 3> = '23'
+ const t2: SubString<'123', 0, 2> = '12'
+ const t3: SubString<'123', 0, 3> = '123'
+```
+
+### `GetTuple<Length>`
+
+- 构造指定长度元组
+- `Length extends number=0`:
+
+### `ArraySet<T, Index, Value>`
+
+- 更改元组中指定索引位的类型
+- `T extends unknown[]`
+- `Index extends number`
+- `Value`
+
+```ts
+ const t1: ArraySet<[1, 3, 4], 2, 5> = [1, 3, 5]
+```
+
+### `Concat<T1,T2>`
+
+- 连接两个数组
+- `T1 extends unknown[]`
+- `T2 extends unknown[]`
+
 ### function
 
 | type                                         | 描述                 |
@@ -314,6 +347,15 @@ export type IsNumberEqual<
 > = Strict extends true
   ? CheckLeftIsExtendsRight<L, R>
   : CheckLeftIsExtendsRight<Stringify<L>, Stringify<R>>
+
+
+// 功能和SubString一样
+export type SubStr<
+  S extends string,
+  Start extends number,
+  Len extends number
+> = SubStringHelper<S, Start, IntAddSingle<Start, Len>>
+
 
 |`IsNumberNotEqual<
   L extends NumberLike,
