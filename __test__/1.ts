@@ -6,4 +6,8 @@ export class AClass {
   }
 }
 
-export type a = Record<'string',string>
+export type a = Record<'string'|'a',string>
+const a1:a = {
+  'string':'',
+  'a': '123'
+}
