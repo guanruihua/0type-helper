@@ -9,29 +9,6 @@ type IsTempEqual<A, B> = (<T>() => T extends A ? 1 : 2) extends <
   ? true
   : false
 
-// type FilterHelper<
-//   T extends unknown[],
-//   C,
-//   Strict extends boolean,
-//   Offset extends number = 0,
-//   Cache extends unknown[] = []
-// > = Offset extends T["length"]
-//   ? Cache
-//   : FilterHelper<
-//       T,
-//       C,
-//       Strict,
-//       IntAddSingle<Offset, 1>,
-//       And<Strict, IsEqual<T[Offset], C>> extends true
-//         ? Push<Cache, T[Offset]>
-//         : And<
-//             Not<Strict>,
-//             CheckLeftIsExtendsRight<T[Offset], C>
-//           > extends true
-//         ? Push<Cache, T[Offset]>
-//         : Cache
-//     >
-
 /**
  * 过滤出元组类型中符合条件的类型
  * @example
@@ -160,19 +137,6 @@ export type Shift<T extends unknown[]> = T extends [infer R, ...infer rest]
 export type UnShift<T extends unknown[], Item> = [Item, ...T]
 
 /*--- start ---*/
-
-type GetTupleHelper<
-  Length extends number = 0,
-  R extends unknown[] = []
-> = R['length'] extends Length ? R : GetTupleHelper<Length, [...R, unknown]>
-
-/* 构造指定长度元组 */
-export type GetTuple<Length extends number = 0> = GetTupleHelper<Length>
-
-/*--- end ---*/
-
-/*--- start ---*/
-
 type SetHelper<
   T extends unknown[],
   Index extends number,
@@ -225,3 +189,5 @@ export type Join<
       : never
     : never
   : never
+
+  

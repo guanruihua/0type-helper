@@ -5,4 +5,5 @@ public
 .cz-config.js
 test/
 lib/
-src/*/__test__
+**/*/__test__
+*.config.js
