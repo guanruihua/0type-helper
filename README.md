@@ -281,6 +281,11 @@
 - 从元祖类型构造联合类型
 - `T extends unknown[]`
 
+```ts
+ const t1: TupleToUnion<['a', 'b']> = 'a'
+ const t2: TupleToUnion<['a', 'b']> = 'b'
+```
+
 ### `Pop<T>`
 
 - `T extends unknown[]`
@@ -309,10 +314,53 @@
 
 - `T extends unknown[]`
 
-```ts
- const t1: TupleToUnion<['a', 'b']> = 'a'
- const t2: TupleToUnion<['a', 'b']> = 'b'
-```
+### `Fill<T>`
+
+- `T extends unknown[]`
+
+### `Fillter<T>`
+
+- `T extends unknown[]`
+
+### `MapWithIndex<T>`
+
+- `T extends unknown[]`
+
+### `Find<T>`
+
+- `T extends unknown[]`
+
+### `Reverse<T>`
+
+- `T extends unknown[]`
+
+### `FindLast<T>`
+
+- `T extends unknown[]`
+
+### `FindIndex<T>`
+
+- `T extends unknown[]`
+
+### `FindLastIndex<T>`
+
+- `T extends unknown[]`
+
+### `Flat<T>`
+
+- `T extends unknown[]`
+
+### `Includes<T>`
+
+- `T extends unknown[]`
+
+### `Slice<T>`
+
+- `T extends unknown[]`
+
+### `Sort<T>`
+
+- `T extends unknown[]`
 
 ### function
 
