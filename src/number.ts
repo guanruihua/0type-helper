@@ -1,8 +1,11 @@
-import { Split } from './string'
+// import { Split } from './string'
 // import { Every } from './array';
 import { Not, Stringify, CheckLeftIsExtendsRight } from './index'
 import { IntAddSingleHepler, IntMinusSingleAbsHelper } from './helper'
 
+/**
+ * 可以转换为number的类型
+ */
 export type NumberLike = number | `${number}`
 
 /**

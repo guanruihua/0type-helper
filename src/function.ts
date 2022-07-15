@@ -1,5 +1,8 @@
 // 任意 普通 function
-export type Noop = (...args: any) => any
+export type Noop = (...args: any[]) => any
+export type Func = (...args: any[]) => any
+export type AsyncFunc = (...args:any[]) => any
+
 
 // 获取异步函数的返回值
 export type GetAsyncFunctionReturnType<F extends Noop> = Awaited<ReturnType<F>>
